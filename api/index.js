@@ -17,11 +17,13 @@ app.post("/send-contact-details", async function (req, res) {
     await client_data.create({
         name: body.name,
         email: body.email,
+        tel: body.tel,
         msg: body.msg,
-        optForFollowups: body.optForFollowups || true
+        optForFollowups: body.optForFollowups || false
     })
     console.log("Contact Details sent successfully!");
     res.status(200).json({
+        statusCode: 200,
         msg: "Contact Details sent successfully!"
     })
 })

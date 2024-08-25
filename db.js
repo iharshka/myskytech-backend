@@ -6,6 +6,7 @@ const clientSchema = mongoose.Schema({
     name: String,
     email: String,
     msg: String,
+    tel: Number,
     optForFollowups: Boolean
 })
 
