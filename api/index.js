@@ -1,9 +1,15 @@
-const { client_data } = require("./db")
+const { client_data } = require("../db")
 const express = require("express");
 
 const app = express();
 
 app.use(express.json());
+
+app.get("/", async function(req, res) {
+    const clients = await client_data.find({});
+    console.log("Clients data fetched successfully!")
+    res.json({ statusCode: 200, msg: "Clients data fetched successfully!", data: clients });
+})
 
 app.post("/send-contact-details", async function (req, res) {
     const body = req.body;
