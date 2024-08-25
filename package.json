@@ -1,0 +1,24 @@
+{
+  "name": "myskytech-backend",
+  "version": "1.0.0",
+  "description": "Contact Us Page Backend and database of Users/Clients",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iharshka/myskytech-backend.git"
+  },
+  "author": "Harsh Gautam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iharshka/myskytech-backend/issues"
+  },
+  "homepage": "https://github.com/iharshka/myskytech-backend#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.4"
+  }
+}
