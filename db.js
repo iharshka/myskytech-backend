@@ -5,8 +5,8 @@ mongoose.connect(process.env.MONGODB_CONNECTION_URL).then(() => {console.log("Mo
 const clientSchema = mongoose.Schema({
     name: String,
     email: String,
-    msg: String,
     tel: Number,
+    msg: String,
     optForFollowups: Boolean
 })
 

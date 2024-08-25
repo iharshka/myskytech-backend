@@ -1,9 +1,11 @@
 const { client_data } = require("../db")
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", async function(req, res) {
     const clients = await client_data.find({});
