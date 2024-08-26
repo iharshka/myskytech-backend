@@ -16,12 +16,13 @@ app.get("/", async function(req, res) {
 
 app.post("/send-contact-details", async function (req, res) {
     const payload = req.body;
-    console.log(payload);
-    const parsedPayload = await clientSchema.safeParseAsync(payload);
-    if(!parsedPayload.success) {
-        console.log("Received wrong inputs!")
-        res.status(411).json({statusCode: 411, msg: "You sent the wrong inputs"})
-    }
+    // console.log(payload);
+    // const parsedPayload = await clientSchema.safeParseAsync(payload);
+    // if(!parsedPayload.success) {
+    //     console.log(parsedPayload.success);
+    //     console.log("Received wrong inputs!")
+    //     return res.status(411).json({statusCode: 411, msg: "You sent the wrong inputs"})
+    // }
     await client_data.create({
         name: payload.name,
         email: payload.email,
@@ -30,7 +31,7 @@ app.post("/send-contact-details", async function (req, res) {
         optForFollowups: payload.optForFollowups || false
     })
     console.log("Contact Details sent successfully!");
-    res.status(200).json({
+    return res.status(200).json({
         statusCode: 200,
         msg: "Contact Details sent successfully!"
     })
