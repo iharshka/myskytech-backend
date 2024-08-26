@@ -17,9 +17,11 @@ app.get("/", async function(req, res) {
 app.post("/send-contact-details", async function (req, res) {
     const payload = req.body;
     console.log(payload);
-    const parsedPayload = clientSchema.safeParse(payload);
-    if(!parsedPayload.success)
-        res.json({statusCode: 411, msg: "You sent the wrong inputs"})
+    const parsedPayload = await clientSchema.safeParseAsync(payload);
+    if(!parsedPayload.success) {
+        console.log("Received wrong inputs!")
+        res.status(411).json({statusCode: 411, msg: "You sent the wrong inputs"})
+    }
     await client_data.create({
         name: payload.name,
         email: payload.email,
