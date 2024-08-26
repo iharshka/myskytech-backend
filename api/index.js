@@ -1,4 +1,5 @@
-const { client_data } = require("../db")
+const { client_data } = require("../db");
+const { clientSchema } = require("../types");
 const express = require("express");
 const cors = require("cors");
 
@@ -14,14 +15,17 @@ app.get("/", async function(req, res) {
 })
 
 app.post("/send-contact-details", async function (req, res) {
-    const body = req.body;
-    console.log(body);
+    const payload = req.body;
+    console.log(payload);
+    const parsedPayload = clientSchema.safeParse(payload);
+    if(!parsedPayload.success)
+        res.json({statusCode: 411, msg: "You sent the wrong inputs"})
     await client_data.create({
-        name: body.name,
-        email: body.email,
-        tel: body.tel,
-        msg: body.msg,
-        optForFollowups: body.optForFollowups || false
+        name: payload.name,
+        email: payload.email,
+        tel: payload.tel,
+        msg: payload.msg,
+        optForFollowups: payload.optForFollowups || false
     })
     console.log("Contact Details sent successfully!");
     res.status(200).json({
@@ -32,6 +36,7 @@ app.post("/send-contact-details", async function (req, res) {
 
 app.use(function(err, req, res, next) {
     res.statusCode(500).json({
+        statusCode: 500,
         msg: "Internal Server Error!"
     })
 })
