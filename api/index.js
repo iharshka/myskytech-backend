@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
 app.post("/signin", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    if(!userExists)
+    if(!userExists(username, password))
         return res.json({statusCode: 401, msg: "Unauthorized access! Username & Password doesn't exist!"});
     const token = jwt.sign({username: username}, process.env.JWT_SECRET);
     console.log("User signed in successfully!")
@@ -77,7 +77,7 @@ app.post("/send-contact-details", async function (req, res) {
 })
 
 app.use(function(err, req, res, next) {
-    res.statusCode(500).json({
+    res.status(500).json({
         statusCode: 500,
         msg: "Internal Server Error!"
     })
