@@ -28,7 +28,7 @@ app.post("/signin", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     if(!userExists(username, password))
-        return res.json({statusCode: 401, msg: "Unauthorized access! Username & Password doesn't exist!"});
+        return res.status(401).json({statusCode: 401, msg: "Unauthorized access! Username & Password doesn't exist!"});
     const token = jwt.sign({username: username}, process.env.JWT_SECRET);
     console.log("User signed in successfully!")
     res.json({ statusCode: 200, msg: "User signed in successfully!", token: token });
@@ -49,7 +49,7 @@ app.get("/clients", async function(req, res) {
     }
     catch(error) {
         console.log("Forbidden, Invalid Authentication! Error:", error);
-        return res.json({statusCode: 403, msg: "Forbidden, Invalid Authentication!"})
+        return res.status(403).json({statusCode: 403, msg: "Forbidden, Invalid Authentication!"})
     }
 })
 
